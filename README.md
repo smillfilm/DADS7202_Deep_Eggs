@@ -17,13 +17,13 @@
 
 ## Table of Contents
 
-[1. Introduction](#1-introduction)
-[2. Data](#2-data)
-[3. Network Architecture](#3-network-architecture)
-[4. Training](#4-training)
-[5. Results](#5-results)
-[6. Discussion](#6-discussion)
-[7. Conclusion](#7-conclusion)
+- [1. Introduction](#1-introduction)
+- [2. Data](#2-data)
+- [3. Network Architecture](#3-network-architecture)
+- [4. Training](#4-training)
+- [5. Results](#5-results)
+- [6. Discussion](#6-discussion)
+- [7. Conclusion](#7-conclusion)
 
 ---
 
