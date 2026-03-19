@@ -1,4 +1,4 @@
-# DADS7202-Deep Learning: DeepEggs (Egg Classification with CNN)
+# DADS7202-Deep Learning: DeepEggs
 
 # Team members:
 1. สุมนสิริ เตชะสุนทโรวาท
