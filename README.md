@@ -48,34 +48,44 @@ We classify 4 styles of egg cooking. Each style has distinct visual characterist
 Soft white exterior with runny/semi-cooked yolk. Often served in a cup or bowl.
 
 <!-- ใส่รูปตัวอย่าง: ![](Images/soft_boiled.png) -->
+<img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/93440426-ecfe-4476-8d74-3d87ed69ba3d" />
+
 
 🍳 **2. Fried Egg**
 
 Flat white base with a raised round yolk in the center. Crispy edges.
 
 <!-- ใส่รูปตัวอย่าง: ![](Images/fried_egg.png) -->
+<img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/d85192b8-fa38-4535-82a4-d180eba3e3ec" />
 
 🥘 **3. Omelet**
 
 Deep-fried in oil, puffy and crispy, irregular edges, golden-brown surface with bubble texture.
 
 <!-- ใส่รูปตัวอย่าง: ![](Images/omelet.png) -->
+<img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/96db7cb8-5a0f-46cd-b84f-6c8ae2130a37" />
 
 🥄 **4. Scrambled Eggs**
 
 Soft, small chunky curds scattered on plate. No defined shape. Creamy yellow color.
 
 <!-- ใส่รูปตัวอย่าง: ![](Images/scrambled.png) -->
+<img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/36f5ac6f-e0d5-4c23-b6b6-267dc5100f14" />
+
 
 ### Dataset Summary
 
 | Class | Name | Train | Test | Total |
 |-------|------|-------|------|-------|
-| `0` | fried_egg | 81 | 20 | 101 |
-| `1` | omelet | 88 | 20 | 108 |
-| `2` | scrambled | 80 | 20 | 100 |
-| `3` | soft_boiled | 81 | 20 | 101 |
+| `1` | fried_egg | 81 | 20 | 101 |
+| `2` | omelet | 88 | 20 | 108 |
+| `3` | scrambled | 80 | 20 | 100 |
+| `4` | soft_boiled | 81 | 20 | 101 |
 | | **Total** | **330** | **80** | **410** |
+
+<br>
+<img width="790" height="490" alt="image" src="https://github.com/user-attachments/assets/b7cc3090-1d8b-4c9a-bfb5-9b934aace625" />
+
 
 #### 📍 Data Source:
 - All images were **manually collected from websites** including Google Images, food blogs, recipe websites, and social media (Instagram, Pinterest)
@@ -87,6 +97,8 @@ Soft, small chunky curds scattered on plate. No defined shape. Creamy yellow col
 #### 📊 EDA:
 
 <!-- ใส่รูป bar chart: ![](Images/class_distribution.png) -->
+<img width="1589" height="463" alt="image" src="https://github.com/user-attachments/assets/efb7d071-cd0f-4ba6-b966-f7a79b7816d2" />
+
 
 - **Imbalanced ratio:** 1.10x (Max: 88 / Min: 80) → **Fairly balanced**
 - **Image size:** Width 168-2463px, Height 192-2560px (highly varied from web)
@@ -158,6 +170,8 @@ For all backbones, we apply the same approach:
 We tested ResNet-50 (ImageNet) on our egg images **without any fine-tuning**:
 
 <!-- ใส่รูป baseline: ![](Images/baseline_wrong.png) -->
+<img width="1943" height="985" alt="image" src="https://github.com/user-attachments/assets/66d6775a-b915-4896-a239-7b249e86bb91" />
+
 
 > Pre-trained model predicts eggs as "frying pan", "pizza", "mashed potato" → **Confirms need for fine-tuning!**
 
