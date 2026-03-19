@@ -134,12 +134,16 @@ We selected 5 architectures that differ significantly in design philosophy:
 
 ### Transfer Learning Strategy
 
-<!-- ใส่รูป diagram: ![](Images/transfer_learning.png) -->
-
 For all backbones, we apply the same approach:
-- **Keep:** Feature extractor (conv layers) + pre-trained ImageNet weights
-- **Remove:** Original classification head (1,000 classes)
-- **Add:** Custom classifier head for 4 egg classes
+
+* **Keep:** Feature extractor (conv layers) + pre-trained ImageNet weights.
+* **Remove:** Original classification head (1,000 classes).
+    * **VGG-16 (2014):** `FC(4096) → ReLU → Dropout → FC(4096) → ReLU → Dropout → FC(1000)`
+    * **ResNet-50 (2015):** `FC(2048 → 1000)`
+    * **EfficientNet-B0 (2019):** `Dropout(0.2) → FC(1280 → 1000)`
+    * **MobileNetV3 (2019):** `FC(1280 → 1000)`
+    * **ConvNeXt-Tiny (2022):** `LayerNorm → FC(768 → 1000)`
+* **Add:** Custom classifier head tailored for our 4 egg classes.
 
 ### Custom Classifier Head
 
