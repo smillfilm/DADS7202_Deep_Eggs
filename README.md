@@ -1,4 +1,4 @@
-# DADS7202-Deep Learning: DeepEggs 🍳🥚
+# DADS7202: DeepEggs 🍳🥚
 
 # Team members:
 1. Sumonsiri Techasuntharowat 6720422007
