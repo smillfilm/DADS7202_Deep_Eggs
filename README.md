@@ -29,8 +29,6 @@
 
 ## 1. Introduction
 
-**`multi-class image classification`**:
-
 - This project aims to test **5 CNN pre-trained models** (`VGG-16`, `ResNet-50`, `EfficientNet-B0`, `MobileNetV3-Large`, `ConvNeXt-Tiny`) on the ImageNet dataset and fine-tune them to classify **4 styles of egg cooking** which is our custom image dataset collected from various websites.
 - We compare performance of **5 different CNN architectures** spanning from 2014 to 2022, covering different design philosophies.
 - We use **2-Stage Fine-tuning** strategy (freeze → unfreeze) with **Weighted CrossEntropyLoss** to handle class imbalance.
