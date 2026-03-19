@@ -148,7 +148,7 @@ For all backbones, we apply the same approach:
 ### Custom Classifier Head
 
 ```
-[Backbone Output] → Dropout(p) → Linear(in, 256) → ReLU → Dropout(px0.6) → Linear(256, 4)
+[Backbone Output] → Dropout(p) → Linear(in, 256) → ReLU → Dropout(p*0.6) → Linear(256, 4)
 ```
 
 > `in` varies: VGG=4096, ResNet=2048, EfficientNet=1280, MobileNet=1280, ConvNeXt=768
