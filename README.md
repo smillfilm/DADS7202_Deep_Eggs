@@ -84,7 +84,7 @@ Soft, small chunky curds scattered on plate. No defined shape. Creamy yellow col
 | | **Total** | **330** | **80** | **410** |
 
 <br>
-<img width="790" height="490" alt="image" src="https://github.com/user-attachments/assets/b7cc3090-1d8b-4c9a-bfb5-9b934aace625" />
+<img width="850" height="490" alt="image" src="https://github.com/user-attachments/assets/b7cc3090-1d8b-4c9a-bfb5-9b934aace625" />
 
 
 #### 📍 Data Source:
