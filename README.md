@@ -6,9 +6,7 @@
 3. กฤษฎา เมตต์การุณ์จิต
 4. สุพิชฌาย์ แก้วเปล่งศรีสกุล
 
-# 🥚 Egg Style Classification with CNN (Group_[ชื่อกลุ่ม])
-
-> Objective: **`What CNN architecture gives the best performance for classifying egg cooking styles from web-collected images?`**
+# 🥚 Egg Classification with CNN
 
 ## ✨Highlight
 
@@ -19,20 +17,17 @@
 
 ## Table of Contents
 
-- [1. Introduction🎯](#1-introduction)
-- [2. Data📑](#2-data)
-- [3. Network Architecture📦](#3-network-architecture)
-- [4. Training🔮](#4-training)
-- [5. Results📈](#5-results)
-- [6. Discussion💭](#6-discussion)
-- [7. Conclusion📝](#7-conclusion)
-- [8. References🌐](#8-references)
-- [👥 Members, Contribution and Responsibility](#-members-contribution-and-responsibility)
-- [🖇️ End Credit](#%EF%B8%8F-end-credit)
+- [1. Introduction](#1-introduction)
+- [2. Data](#2-data)
+- [3. Network Architecture](#3-network-architecture)
+- [4. Training](#4-training)
+- [5. Results](#5-results)
+- [6. Discussion](#6-discussion)
+- [7. Conclusion](#7-conclusion)
 
 ---
 
-## 1. Introduction🎯
+## 1. Introduction
 
 **`multi-class image classification`**:
 
@@ -46,7 +41,7 @@
 
 ---
 
-## 2. Data📑
+## 2. Data
 
 We classify 4 styles of egg cooking. Each style has distinct visual characteristics:
 
@@ -128,7 +123,7 @@ RandomAffine(translate=0.1, scale=0.9-1.1)
 
 ---
 
-## 3. Network Architecture📦
+## 3. Network Architecture
 
 ### Pre-trained Models
 
@@ -179,7 +174,7 @@ We tested ResNet-50 (ImageNet) on our egg images **without any fine-tuning**:
 
 ---
 
-## 4. Training🔮
+## 4. Training
 
 ### 2-Stage Fine-tuning Strategy
 
@@ -214,7 +209,7 @@ We tested ResNet-50 (ImageNet) on our egg images **without any fine-tuning**:
 
 ---
 
-## 5. Results📈
+## 5. Results
 
 ### 📊 Model Performance Comparison
 
@@ -280,7 +275,7 @@ We use GradCAM to visualize which parts of the image are most important for clas
 
 ---
 
-## 6. Discussion💭
+## 6. Discussion
 
 - **EfficientNet-B0** achieves the best performance despite having the fewest parameters (5.3M vs VGG's 138M). This demonstrates that **Compound Scaling** is highly effective for small custom datasets.
 - **ResNet-50** showed the highest validation accuracy (98.48%) but similar test accuracy to VGG-16 (91.25%), suggesting slight **overfitting** on the validation set.
@@ -296,7 +291,7 @@ We use GradCAM to visualize which parts of the image are most important for clas
 
 ---
 
-## 7. Conclusion📝
+## 7. Conclusion
 
 - We selected 5 pre-trained models (VGG-16, ResNet-50, EfficientNet-B0, MobileNetV3, ConvNeXt-Tiny) spanning 2014-2022
 - The best model is **🏆EfficientNet-B0** with test accuracy **92.50%** using only **5.3M parameters**
@@ -313,18 +308,6 @@ We use GradCAM to visualize which parts of the image are most important for clas
 - Deploy best model as a mobile app using MobileNetV3
 
 [🔝](#highlight)
-
----
-
-## 8. References🌐
-
-### Libraries
-- **`PyTorch`** 2.x
-- **`torchvision`** (pre-trained models + transforms)
-- **`scikit-learn`** (evaluation metrics)
-- **`pytorch-grad-cam`** (GradCAM visualization)
-- **`Weights & Biases`** (experiment tracking)
-- **`Matplotlib`** + **`Seaborn`** (visualization)
 
 ---
 
