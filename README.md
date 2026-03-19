@@ -45,25 +45,25 @@
 
 We classify 4 styles of egg cooking. Each style has distinct visual characteristics:
 
-🥚 **1. Soft-boiled Egg — ไข่ลวก**
+🥚 **1. Soft-boiled Egg**
 
 Soft white exterior with runny/semi-cooked yolk. Often served in a cup or bowl.
 
 <!-- ใส่รูปตัวอย่าง: ![](Images/soft_boiled.png) -->
 
-🍳 **2. Fried Egg — ไข่ดาว**
+🍳 **2. Fried Egg**
 
 Flat white base with a raised round yolk in the center. Crispy edges.
 
 <!-- ใส่รูปตัวอย่าง: ![](Images/fried_egg.png) -->
 
-🥘 **3. Thai Omelet — ไข่เจียว**
+🥘 **3. Omelet**
 
 Deep-fried in oil, puffy and crispy, irregular edges, golden-brown surface with bubble texture.
 
 <!-- ใส่รูปตัวอย่าง: ![](Images/omelet.png) -->
 
-🥄 **4. Scrambled Eggs — สแครมเบิล**
+🥄 **4. Scrambled Eggs**
 
 Soft, small chunky curds scattered on plate. No defined shape. Creamy yellow color.
 
