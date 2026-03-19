@@ -93,27 +93,26 @@ Soft, small chunky curds scattered on plate. No defined shape. Creamy yellow col
 - **Brightness:** Mean pixel value 59-211 (diverse lighting conditions)
 - **Handling:** Applied **Weighted CrossEntropyLoss** as precaution
 
-#### Data Pre-processing & ➕Data Augmentation:
+#### Data Pre-processing & Data Augmentation:
 
 - Images resized to **256×256** then **RandomCrop to 224×224** (ImageNet standard)
 - Normalized with ImageNet mean/std: `mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]`
-- **Online augmentation** (applied during training only):
 
 ```python
 RandomHorizontalFlip(p=0.5)           # Egg can be flipped L-R
 RandomRotation(degrees=20)             # Plate may be tilted
-ColorJitter(brightness=0.3, hue=0.05)  # Simulate different lighting (low hue: egg color matters!)
+ColorJitter(brightness=0.3, hue=0.05)  # Simulate different lighting (low hue: egg color matters)
 RandomPerspective(0.15, p=0.3)         # Different camera angles
 RandomAffine(translate=0.1, scale=0.9-1.1)
 ```
 
-#### ✂️ Data Splitting (train/val/test):
+#### Data Splitting (train/val/test):
 
 | Set | Count | Method |
 |-----|-------|--------|
 | **Train** | 264 (80%) | `random_split` from train_set |
 | **Validation** | 66 (20%) | `random_split` from train_set |
-| **Test** | 80 | Separate folder (never seen during training) |
+| **Test** | 80 | Separate folder |
 
 [🔝](#highlight)
 
