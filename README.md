@@ -3,8 +3,8 @@
 # Team members:
 1. Sumonsiri Techasuntharowat 6720422007
 2. สหภูมิ เกตุแก้ว
-3. กฤษฎา เมตต์การุณ์จิต
-4. สุพิชฌาย์ แก้วเปล่งศรีสกุล
+3. Kritsada Matkaruchit 6720422028
+4. supitcha kaewplengsrisakul 6720422020
 
 # 🥚 Egg Classification with CNN
 
