@@ -122,15 +122,15 @@ RandomAffine(translate=0.1, scale=0.9-1.1)
 
 ### Pre-trained Models
 
-We selected **5 architectures** that differ significantly in design philosophy:
+We selected 5 architectures that differ significantly in design philosophy:
 
-| # | Model | Year | Params | Accuracy | Key Concept | Why Selected |
-|---|-------|------|--------|-------------|-------------|
-| 1 | VGG-16 | 2014 | 138M | 71.3 |Plain Stack | Classic baseline, good GradCAM visualization |
-| 2 | ResNet-50 | 2015 | 25.6M | 74.9 | Skip Connection | Solves vanishing gradient, most popular |
-| 3 | EfficientNet-B0 | 2019 | 5.3M | 77.69 | Compound Scaling | Lightweight but accurate |
-| 4 | MobileNetV3-Large | 2019 | 5.5M | 74.042 | Depthwise Separable | Lightest, mobile-deployable |
-| 5 | ConvNeXt-Tiny | 2022 | 28.6M | 81.3 | Modernized CNN | Latest SOTA, competes with ViT |
+| # | Model | Year | Params | Top-1 Acc. (%) | Key Concept | Why Selected |
+|:-:|:---|:-:|:---:|:---:|:---|:---|
+| 1 | **VGG-16** | 2014 | 138M | 71.30 | Plain Stack | Classic baseline, good GradCAM visualization |
+| 2 | **ResNet-50** | 2015 | 25.6M | 74.90 | Skip Connection | Solves vanishing gradient, most popular |
+| 3 | **EfficientNet-B0** | 2019 | 5.3M | 77.69 | Compound Scaling | Lightweight but accurate |
+| 4 | **MobileNetV3-Large** | 2019 | 5.5M | 74.04 | Depthwise Separable | Lightest, mobile-deployable |
+| 5 | **ConvNeXt-Tiny** | 2022 | 28.6M | 81.30 | Modernized CNN | Latest SOTA, competes with ViT |
 
 ### Transfer Learning Strategy
 
