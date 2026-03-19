@@ -1,7 +1,7 @@
 # DADS7202-Deep Learning: DeepEggs 🍳🥚
 
 # Team members:
-1. สุมนสิริ เตชะสุนทโรวาท
+1. Sumonsiri Techasuntharowat 6720422007
 2. สหภูมิ เกตุแก้ว
 3. กฤษฎา เมตต์การุณ์จิต
 4. สุพิชฌาย์ แก้วเปล่งศรีสกุล
