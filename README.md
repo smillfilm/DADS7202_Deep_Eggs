@@ -148,16 +148,8 @@ For all backbones, we apply the same approach:
 ### Custom Classifier Head
 
 ```
-[Backbone Output] → Dropout(0.3) → Linear(in, 256) → ReLU → Dropout(0.18) → Linear(256, 4)
+[Backbone Output] → Dropout(p) → Linear(in, 256) → ReLU → Dropout(px0.6) → Linear(256, 4)
 ```
-
-| Layer | Type | Purpose |
-|-------|------|---------|
-| 1 | Dropout(0.3) | Randomly disable 30% neurons → reduce overfitting |
-| 2 | Linear(in → 256) | Compress features from backbone |
-| 3 | ReLU | Non-linear activation |
-| 4 | Dropout(0.18) | Additional regularization |
-| 5 | Linear(256 → 4) | Output: 4 egg classes |
 
 > `in` varies: VGG=4096, ResNet=2048, EfficientNet=1280, MobileNet=1280, ConvNeXt=768
 
