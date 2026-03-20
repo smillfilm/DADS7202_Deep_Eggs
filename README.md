@@ -254,7 +254,7 @@ Using best hyperparameters from W&B Sweep, each model was trained **3 times** wi
 #### 📊 Accuracy & Loss: Training
 
 <!-- ใส่รูป training curves: ![](Images/training_curves.png) -->
-<img width="1150" height="2200" alt="image" src="https://github.com/user-attachments/assets/58e6244c-880e-42d3-8645-01252f78ab73" />
+<img width="900" height="1600" alt="image" src="https://github.com/user-attachments/assets/58e6244c-880e-42d3-8645-01252f78ab73" />
 
 
 ### 📊 Evaluation Metrics (Best Model: ConvNeXt-Tiny)
