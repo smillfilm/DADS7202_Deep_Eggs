@@ -157,9 +157,17 @@ For all backbones, we apply the same approach:
 
 ```
 [Backbone Output] → Dropout(p) → Linear(in, 256) → ReLU → Dropout(p*0.6) → Linear(256, 4)
-```
 
+```
 > `in` varies: VGG=4096, ResNet=2048, EfficientNet=1280, MobileNet=1280, ConvNeXt=768
+
+| Architecture | #Layers | Composition |
+|---|---|---|
+| VGG16 | 5 | Drop → Linear → ReLU → Drop → Linear |
+| ResNet50 | 5 | Drop → Linear → ReLU → Drop → Linear |
+| EfficientNet-B0 | 5 | Drop → Linear → ReLU → Drop → Linear |
+| MobileNetV3-Large | 4 | Drop → Linear → ReLU → Linear |
+| ConvNeXt-Tiny | 5 | Drop → Linear → ReLU → Drop → Linear |
 
 ### Pre-trained Baseline (No Fine-tuning)
 
@@ -177,10 +185,12 @@ We tested ResNet-50 (ImageNet) on our egg images **without any fine-tuning**:
 
 ### 2-Stage Fine-tuning Strategy
 
-| Stage | Action | Frozen Layers | Epochs | Learning Rate |
-|-------|--------|--------------|--------|---------------|
-| **Stage 1** | Train classifier head only | ✅ Backbone frozen | 8 | from Sweep |
-| **Stage 2** | Fine-tune entire model | ❌ All unfrozen | 25 (+Early Stop) | from Sweep |
+
+| Stage | Action | Frozen Layers | Trainable Layers (weights updated) | Epochs | Learning Rate |
+|-------|--------|--------------|-----------------------------------|--------|---------------|
+| **Stage 1** | Train classifier head only | ✅ Entire backbone (feature extractor) | ✅ Custom classifier (Dropout → Linear → ReLU → Linear) | 8 | From sweep |
+| **Stage 2** | Fine-tune entire model | ❌ None (all layers unfrozen) | ✅ Backbone + classifier (all weights updated) | 25 (+Early Stop) | From sweep |
+
 
 **Why 2 stages?** The new classifier head starts with random weights. If we unfreeze the backbone immediately, random gradients from the head would destroy the good pre-trained weights.
 
