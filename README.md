@@ -337,3 +337,12 @@ We use GradCAM to visualize which parts of the image are most important for clas
 
 - [W&B Dashboard](https://wandb.ai/mild-supitcha25-nida-business-school/egg-classification/sweeps/raehcqgv?nw=nwuserployst)
 - [Notebook (Colab)](https://colab.research.google.com/drive/1MjRDBaka-BjGl5M0fNZbH3jrSOW99fN7#scrollTo=eTlAqRUOA4xM)
+
+---
+
+## 📑 Reference
+
+- Deepa, S., Zeema, J. L., & Gokila, S. (2024). Exploratory Architectures Analysis of Various Pre-trained Image Classification Models for Deep Learning. Journal of Advances in Information Technology, 15(1), 66-78. DOI: 10.12720/jait.15.1.66-78
+- Zhang, X., Han, N., & Zhang, J. (2024). Comparative analysis of VGG, ResNet, and GoogLeNet architectures evaluating performance, computational efficiency, and convergence rates. Preprint. DOI: 10.54254/2755-2721/44/20230676
+- Guest Lecturer, Dept. of Electronics and Communication, NSS Polytechnic College. (2022). A Review on Food Classification using Convolutional Neural Networks. International Journal of Innovative Research in Technology, 9(3). 2027-2030.
+- Shorten, C., & Khoshgoftaar, T. M. (2019). A survey on Image Data Augmentation for Deep Learning. Journal of Big Data, 6(60). https://doi.org/10.1186/s40537-019-0197-0
