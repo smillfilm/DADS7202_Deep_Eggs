@@ -361,7 +361,6 @@ We use GradCAM to visualize which parts of the image are most important for clas
 - Increase dataset to 200+ images per class
 - Add more classes (braised egg, steamed egg, poached egg)
 - Try Vision Transformer (ViT, DeiT)
-- Deploy best model as a mobile app using MobileNetV3
 
 [🔝](#highlight)
 
