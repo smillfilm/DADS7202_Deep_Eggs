@@ -228,6 +228,9 @@ We used **Weights & Biases Sweep** with Bayesian optimization to find the best h
 <!-- ใส่รูป W&B dashboard: ![](Images/wandb_dashboard.png) -->
 <img width="1642" height="588" alt="Screenshot 2026-03-20 at 11 11 13 PM" src="https://github.com/user-attachments/assets/25152be9-2e43-4635-b8be-4bf66c8d8ab7" />
 
+<img width="2900" height="1500" alt="image" src="https://github.com/user-attachments/assets/36acf57c-c998-447d-9952-af9a62182212" />
+
+
 
 
 
