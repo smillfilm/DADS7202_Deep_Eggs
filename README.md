@@ -335,5 +335,5 @@ We use GradCAM to visualize which parts of the image are most important for clas
 
 ## 🔗 Links
 
-- [W&B Dashboard]([https://wandb.ai/mild-supitcha25-nida-business-school/egg-classification](https://wandb.ai/mild-supitcha25-nida-business-school/egg-classification/sweeps/raehcqgv?nw=nwuserployst))
+- [W&B Dashboard](https://wandb.ai/mild-supitcha25-nida-business-school/egg-classification/sweeps/raehcqgv?nw=nwuserployst)
 - [Notebook (Colab)](https://colab.research.google.com/drive/1MjRDBaka-BjGl5M0fNZbH3jrSOW99fN7#scrollTo=eTlAqRUOA4xM)
