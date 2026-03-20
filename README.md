@@ -367,8 +367,8 @@ We use GradCAM to visualize which parts of the image are most important for clas
 - **GradCAM** confirms models focus on egg texture and shape, not background
 - **Eyeball analysis:** 77/80 correct, 3 errors mostly between visually similar classes
 
-### ⏩️ Future Work
-- Increase dataset to 200+ images per class
+### ⏩️ Limitations & Future Work
+- In this study, hyperparameter tuning was conducted across five models with a total of 20 iterations, averaging approximately four runs per model. This limited number of iterations may not have been sufficient to identify the optimal configuration for each model, potentially contributing to the discrepancy between the observed results and the expected performance. Increasing the number of tuning iterations per model could provide a more comprehensive understanding of performance trends and better reveal the true potential of each model.
 - Add more classes (braised egg, steamed egg, poached egg)
 - Try Vision Transformer (ViT, DeiT)
 
