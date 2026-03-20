@@ -2,9 +2,9 @@
 
 # Team members:
 1. Sumonsiri Techasuntharowat 6720422007
-2. สหภูมิ เกตุแก้ว
-3. Kritsada Matkaruchit 6720422028
-4. supitcha kaewplengsrisakul 6720422020
+2. สหภูมิ เกตุแก้ว 6720422010
+3. Supitcha kaewplengsrisakul 6720422020
+4. Kritsada Matkaruchit 6720422028
 
 # 🥚 Egg Classification with CNN
 
