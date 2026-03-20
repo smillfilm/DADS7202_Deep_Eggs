@@ -50,17 +50,20 @@ Soft white exterior with runny/semi-cooked yolk. Often served in a cup or bowl.
 
 <img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/93440426-ecfe-4476-8d74-3d87ed69ba3d" />
 
+
 🍳 **2. Fried Egg**
 
 Flat white base with a raised round yolk in the center. Crispy edges.
 
 <img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/d85192b8-fa38-4535-82a4-d180eba3e3ec" />
 
+
 🥘 **3. Omelet**
 
 Deep-fried in oil, puffy and crispy, irregular edges, golden-brown surface with bubble texture.
 
 <img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/96db7cb8-5a0f-46cd-b84f-6c8ae2130a37" />
+
 
 🥄 **4. Scrambled Eggs**
 
@@ -244,11 +247,11 @@ Using best hyperparameters from W&B Sweep, each model was trained **3 times** wi
 
 > **🏆 ConvNeXt-Tiny** achieves the highest average test accuracy (95.00% ± 1.02%) with the lowest variance
 
-#### Accuracy & Loss: Training
+#### 📊 Accuracy & Loss: Training
 
 <!-- ใส่รูป training curves: ![](Images/training_curves.png) -->
 
-### 🪟 Evaluation Metrics (Best Model: ConvNeXt-Tiny)
+### 📊 Evaluation Metrics (Best Model: ConvNeXt-Tiny)
 
 | Metric | Score |
 |--------|:-----:|
@@ -257,7 +260,7 @@ Using best hyperparameters from W&B Sweep, each model was trained **3 times** wi
 | **Recall** | 0.9625 |
 | **F1-Score** | 0.9625 |
 
-#### Confusion Matrices
+#### 📊 Confusion Matrices
 
 <!-- ใส่รูป confusion matrix: ![](Images/confusion_matrix.png) -->
 
@@ -273,7 +276,7 @@ We use GradCAM to visualize which parts of the image are most important for clas
 - **Scrambled** → Model focuses on **scattered small chunks** pattern
 - **Soft-boiled** → Model focuses on **runny yolk** and **soft white texture**
 
-#### GradCAM Comparison Across Architectures
+#### 🔦 GradCAM Comparison Across Architectures
 
 <!-- ใส่รูป GradCAM comparison: ![](Images/gradcam_comparison.png) -->
 
@@ -320,7 +323,7 @@ We use GradCAM to visualize which parts of the image are most important for clas
 - **GradCAM** confirms models focus on egg texture and shape, not background
 - **Eyeball analysis:** 77/80 correct, 3 errors mostly between visually similar classes
 
-### Future Work
+### ⏩️ Future Work
 - Increase dataset to 200+ images per class
 - Add more classes (braised egg, steamed egg, poached egg)
 - Try Vision Transformer (ViT, DeiT)
