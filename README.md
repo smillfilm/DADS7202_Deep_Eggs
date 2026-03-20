@@ -226,6 +226,10 @@ We used **Weights & Biases Sweep** with Bayesian optimization to find the best h
 - Every team member logs experiments to the same project
 
 <!-- ใส่รูป W&B dashboard: ![](Images/wandb_dashboard.png) -->
+<img width="1642" height="588" alt="Screenshot 2026-03-20 at 11 11 13 PM" src="https://github.com/user-attachments/assets/25152be9-2e43-4635-b8be-4bf66c8d8ab7" />
+
+
+
 
 [🔝](#highlight)
 
@@ -250,6 +254,8 @@ Using best hyperparameters from W&B Sweep, each model was trained **3 times** wi
 #### 📊 Accuracy & Loss: Training
 
 <!-- ใส่รูป training curves: ![](Images/training_curves.png) -->
+<img width="1150" height="2200" alt="image" src="https://github.com/user-attachments/assets/58e6244c-880e-42d3-8645-01252f78ab73" />
+
 
 ### 📊 Evaluation Metrics (Best Model: ConvNeXt-Tiny)
 
@@ -263,12 +269,32 @@ Using best hyperparameters from W&B Sweep, each model was trained **3 times** wi
 #### 📊 Confusion Matrices
 
 <!-- ใส่รูป confusion matrix: ![](Images/confusion_matrix.png) -->
+<table>
+  <tr>
+    <td align="center"><img width="300" src="https://github.com/user-attachments/assets/e9dfd727-f93c-40e1-b687-af2912ea7a7d"/></td>
+    <td align="center"><img width="300" src="https://github.com/user-attachments/assets/dd294ef2-b41b-4891-8dcf-982bd1e29e9f"/></td>
+    <td align="center"><img width="300" src="https://github.com/user-attachments/assets/dcfe6833-b01b-4612-ac4f-ec750b378816"/></td>
+  </tr>
+  <tr>
+    <td align="center"><img width="300" src="https://github.com/user-attachments/assets/6a283f78-730c-42b6-8cbd-df9108fef7c0"/></td>
+    <td align="center"><img width="300" src="https://github.com/user-attachments/assets/f9ac6092-2bbf-4f8d-96cd-7ce539a3156e"/></td>
+    <td></td>
+  </tr>
+</table>
+
+
+
+
 
 ### 🔦 GradCAM Analysis
 
 We use GradCAM to visualize which parts of the image are most important for classification:
 
 <!-- ใส่รูป GradCAM: ![](Images/gradcam.png) -->
+<img width="3153" height="788" alt="image" src="https://github.com/user-attachments/assets/741ed89e-f640-4453-8577-25060f7d9993" />
+
+
+
 
 **Findings:**
 - **Fried egg** → Model focuses on the **raised yolk center** and **crispy white edges**
@@ -279,6 +305,7 @@ We use GradCAM to visualize which parts of the image are most important for clas
 #### 🔦 GradCAM Comparison Across Architectures
 
 <!-- ใส่รูป GradCAM comparison: ![](Images/gradcam_comparison.png) -->
+<img width="2371" height="788" alt="image" src="https://github.com/user-attachments/assets/1dcf2625-4634-41a2-a485-c484676e1198" />
 
 > Different architectures focus on slightly different features, but all correctly identify the egg area rather than the background.
 
@@ -292,6 +319,10 @@ We use GradCAM to visualize which parts of the image are most important for clas
 **Error analysis:** Most misclassifications occur between visually similar classes (omelet ↔ scrambled) where the texture boundary is ambiguous.
 
 <!-- ใส่รูป eyeball: ![](Images/eyeball_wrong.png) -->
+<img width="2341" height="397" alt="image" src="https://github.com/user-attachments/assets/b575c423-15ed-43a3-8e4c-c9b8c2efcc1d" />
+<img width="1128" height="397" alt="image" src="https://github.com/user-attachments/assets/6cc4f203-eaf8-48d3-9746-45a1e10f7402" />
+
+
 
 [🔝](#highlight)
 
@@ -336,7 +367,7 @@ We use GradCAM to visualize which parts of the image are most important for clas
 ## 🔗 Links
 
 - [W&B Dashboard](https://wandb.ai/mild-supitcha25-nida-business-school/egg-classification/sweeps/raehcqgv?nw=nwuserployst)
-- [Notebook (Colab)](https://colab.research.google.com/drive/1MjRDBaka-BjGl5M0fNZbH3jrSOW99fN7#scrollTo=eTlAqRUOA4xM)
+- [Notebook (Colab)](https://colab.research.google.com/drive/1do25ck72gf-eO2eklKODsnIaIs2gdjoI#scrollTo=LuEUZkSBndfb)
 
 ---
 
