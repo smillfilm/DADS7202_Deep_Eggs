@@ -10,9 +10,9 @@
 
 ## ✨Highlight
 
-1. **Based on pre-trained models,** the highest test accuracy is **92.50% of 🏆EfficientNet-B0** with only 5.3M parameters
-2. All 5 models achieved **88-92% test accuracy** after 2-stage fine-tuning on just 330 training images
-3. EfficientNet-B0 early-stopped at epoch 10 (fastest convergence) while VGG-16 needed 22 epochs → **Compound Scaling works great on small datasets**
+1. **After W&B Sweep hyperparameter tuning + 3 runs with different seeds,** the highest average test accuracy is **95.00% ± 1.02% of 🏆ConvNeXt-Tiny**
+2. All 5 models achieved **85-95% test accuracy** after 2-stage fine-tuning on just 330 training images
+3. **W&B Sweep (Bayesian, 20 trials)** found optimal hyperparameters per architecture — ConvNeXt-Tiny benefits most from **Adam optimizer + high dropout (0.5) + no label smoothing**
 4. From **GradCAM analysis**, the models learned to focus on **egg texture and shape** — fried egg's yolk center, omelet's crispy edges, scrambled egg's scattered chunks
 
 ## Table of Contents
@@ -33,6 +33,7 @@
 - We compare performance of **5 different CNN architectures** spanning from 2014 to 2022, covering different design philosophies.
 - We use **2-Stage Fine-tuning** strategy (freeze → unfreeze) with **Weighted CrossEntropyLoss** to handle class imbalance.
 - All experiments are tracked using **Weights & Biases (W&B)** for reproducibility.
+- **W&B Sweep (Bayesian optimization)** is used for systematic hyperparameter tuning across all architectures.
 - Finally, we use [**`GradCAM`**](#-gradcam-analysis) technique to visualize what the CNN has learned.
 
 [🔝](#highlight)
@@ -47,31 +48,25 @@ We classify 4 styles of egg cooking. Each style has distinct visual characterist
 
 Soft white exterior with runny/semi-cooked yolk. Often served in a cup or bowl.
 
-<!-- ใส่รูปตัวอย่าง: ![](Images/soft_boiled.png) -->
 <img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/93440426-ecfe-4476-8d74-3d87ed69ba3d" />
-
 
 🍳 **2. Fried Egg**
 
 Flat white base with a raised round yolk in the center. Crispy edges.
 
-<!-- ใส่รูปตัวอย่าง: ![](Images/fried_egg.png) -->
 <img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/d85192b8-fa38-4535-82a4-d180eba3e3ec" />
 
 🥘 **3. Omelet**
 
 Deep-fried in oil, puffy and crispy, irregular edges, golden-brown surface with bubble texture.
 
-<!-- ใส่รูปตัวอย่าง: ![](Images/omelet.png) -->
 <img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/96db7cb8-5a0f-46cd-b84f-6c8ae2130a37" />
 
 🥄 **4. Scrambled Eggs**
 
 Soft, small chunky curds scattered on plate. No defined shape. Creamy yellow color.
 
-<!-- ใส่รูปตัวอย่าง: ![](Images/scrambled.png) -->
 <img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/36f5ac6f-e0d5-4c23-b6b6-267dc5100f14" />
-
 
 ### Dataset Summary
 
@@ -86,21 +81,17 @@ Soft, small chunky curds scattered on plate. No defined shape. Creamy yellow col
 <br>
 <img width="850" height="490" alt="image" src="https://github.com/user-attachments/assets/b7cc3090-1d8b-4c9a-bfb5-9b934aace625" />
 
-
 #### 📍 Data Source:
 - All images were **manually collected from websites** including Google Images, food blogs, recipe websites, and social media (Instagram, Pinterest)
 - Searched using both Thai and English keywords
 <img width="1554" height="788" alt="image" src="https://github.com/user-attachments/assets/857c606c-634a-4e25-ab91-05c5d07358dd" />
-
 
 #### 🧹 Data Cleaning:
 - All images are RGB format with varying sizes (168px to 2463px)
 
 #### 📊 EDA:
 
-<!-- ใส่รูป bar chart: ![](Images/class_distribution.png) -->
 <img width="1589" height="463" alt="image" src="https://github.com/user-attachments/assets/efb7d071-cd0f-4ba6-b966-f7a79b7816d2" />
-
 
 - **Imbalanced ratio:** 1.10x (Max: 88 / Min: 80) → **Fairly balanced**
 - **Image size:** Width 168-2463px, Height 192-2560px (highly varied from web)
@@ -171,9 +162,7 @@ For all backbones, we apply the same approach:
 
 We tested ResNet-50 (ImageNet) on our egg images **without any fine-tuning**:
 
-<!-- ใส่รูป baseline: ![](Images/baseline_wrong.png) -->
 <img width="1943" height="985" alt="image" src="https://github.com/user-attachments/assets/66d6775a-b915-4896-a239-7b249e86bb91" />
-
 
 > Pre-trained model predicts eggs as "frying pan", "pizza", "mashed potato" → **Confirms need for fine-tuning!**
 
@@ -187,20 +176,43 @@ We tested ResNet-50 (ImageNet) on our egg images **without any fine-tuning**:
 
 | Stage | Action | Frozen Layers | Epochs | Learning Rate |
 |-------|--------|--------------|--------|---------------|
-| **Stage 1** | Train classifier head only | ✅ Backbone frozen | 8 | 1e-3 (high) |
-| **Stage 2** | Fine-tune entire model | ❌ All unfrozen | 25 (+Early Stop) | 1e-4 (low) |
+| **Stage 1** | Train classifier head only | ✅ Backbone frozen | 8 | from Sweep |
+| **Stage 2** | Fine-tune entire model | ❌ All unfrozen | 25 (+Early Stop) | from Sweep |
 
 **Why 2 stages?** The new classifier head starts with random weights. If we unfreeze the backbone immediately, random gradients from the head would destroy the good pre-trained weights.
 
-### Hyperparameters
+### Hyperparameter Tuning — W&B Sweep (Bayesian, 20 trials)
+
+We used **Weights & Biases Sweep** with Bayesian optimization to find the best hyperparameters for each architecture automatically.
+
+#### Sweep Search Space:
+
+| Parameter | Search Space |
+|-----------|-------------|
+| Architecture | vgg16, resnet50, efficientnet_b0, mobilenet_v3, convnext_tiny |
+| Stage 1 LR | log_uniform [1e-4, 1e-2] |
+| Stage 2 LR | log_uniform [1e-5, 1e-3] |
+| Dropout | [0.2, 0.3, 0.4, 0.5] |
+| Weight Decay | log_uniform [1e-5, 1e-3] |
+| Optimizer | [AdamW, SGD+Momentum, Adam] |
+| Label Smoothing | [0.0, 0.1, 0.2] |
+
+#### Best Hyperparameters from Sweep (per architecture):
+
+| Model | Optimizer | Stage2 LR | Dropout | Weight Decay | Label Smooth | Sweep Val Acc |
+|-------|:---------:|:---------:|:-------:|:------------:|:------------:|:-------------:|
+| VGG-16 | AdamW | 1.9e-05 | 0.2 | 2.7e-05 | 0.2 | 98.48% |
+| ResNet-50 | Adam | 3.5e-05 | 0.3 | 4.9e-04 | 0.1 | 98.48% |
+| EfficientNet-B0 | AdamW | 8.8e-05 | 0.2 | 3.8e-05 | 0.1 | 96.97% |
+| MobileNetV3 | Adam | 1.9e-04 | 0.4 | 7.3e-05 | 0.2 | 98.48% |
+| **ConvNeXt-Tiny** | **Adam** | **1.5e-05** | **0.5** | **8.0e-04** | **0.0** | **100.0%** |
+
+### Other Fixed Hyperparameters
 
 | Parameter | Value | Reason |
 |-----------|-------|--------|
-| Optimizer | **AdamW** | Adam + correct weight decay, best for transfer learning |
 | Loss | **Weighted CrossEntropyLoss** | Handles class imbalance |
-| Label Smoothing | **0.1** | Prevents overconfidence → better generalization |
 | LR Scheduler | **CosineAnnealingLR** | Gradually decreases LR following cosine curve |
-| Weight Decay | **1e-4** | L2 regularization |
 | Batch Size | **32** | Balance speed & GPU memory |
 | Early Stopping | **patience=7** | Stop if val_acc doesn't improve for 7 epochs |
 
@@ -218,32 +230,32 @@ We tested ResNet-50 (ImageNet) on our egg images **without any fine-tuning**:
 
 ## 5. Results
 
-### 📊 Model Performance Comparison
+### 📊 Model Performance Comparison (3 Runs × 3 Seeds: mean ± SD)
 
-We train each model with **seed=123** and evaluate on the **test set (80 images)**:
+Using best hyperparameters from W&B Sweep, each model was trained **3 times** with different seeds (42, 123, 777):
 
-| Model | Test Accuracy | Best Val Acc | Early Stop Epoch | Params |
-|-------|:------------:|:------------:|:----------------:|:------:|
-| VGG-16 | 91.25% | 96.97% | 22/25 | 138M |
-| ResNet-50 | 91.25% | 98.48% | 21/25 | 25.6M |
-| **🏆 EfficientNet-B0** | **92.50%** | 95.45% | **10/25** | **5.3M** |
-| MobileNetV3 | 90.00% | 95.45% | 17/25 | 5.4M |
-| ConvNeXt-Tiny | 88.75% | 96.97% | 7/25 | 28.6M |
+| Model | Test Accuracy (mean±SD) | Seed 42 | Seed 123 | Seed 777 |
+|-------|:-----------------------:|:-------:|:--------:|:--------:|
+| VGG-16 | 90.42% ± 2.12% | 91.25% | 87.50% | 92.50% |
+| ResNet-50 | 89.17% ± 2.95% | 91.25% | 91.25% | 85.00% |
+| EfficientNet-B0 | 85.00% ± 3.68% | 88.75% | 86.25% | 80.00% |
+| MobileNetV3 | 92.50% ± 1.02% | 92.50% | 93.75% | 91.25% |
+| **🏆 ConvNeXt-Tiny** | **95.00% ± 1.02%** | **96.25%** | **95.00%** | **93.75%** |
 
-> **🏆 EfficientNet-B0** achieves the highest test accuracy (92.50%) with the fewest parameters (5.3M) and fastest convergence (epoch 10)
+> **🏆 ConvNeXt-Tiny** achieves the highest average test accuracy (95.00% ± 1.02%) with the lowest variance
 
-#### Accuracy & Loss: Train vs Validation
+#### Accuracy & Loss: Training
 
 <!-- ใส่รูป training curves: ![](Images/training_curves.png) -->
 
-### 🪟 Evaluation Metrics (Best Model: EfficientNet-B0)
+### 🪟 Evaluation Metrics (Best Model: ConvNeXt-Tiny)
 
 | Metric | Score |
 |--------|:-----:|
-| **Accuracy** | **92.50%** |
-| **Precision** (macro) | 92.61% |
-| **Recall** (macro) | 92.50% |
-| **F1-Score** (macro) | 92.50% |
+| **Accuracy** | **95.00% ± 1.02%** |
+| **Precision** | 0.9630 |
+| **Recall** | 0.9625 |
+| **F1-Score** | 0.9625 |
 
 #### Confusion Matrices
 
@@ -271,8 +283,8 @@ We use GradCAM to visualize which parts of the image are most important for clas
 
 | Result | Count |
 |--------|:-----:|
-| ✅ Correct predictions | 74 / 80 |
-| ❌ Wrong predictions | 6 / 80 |
+| ✅ Correct predictions | 77 / 80 |
+| ❌ Wrong predictions | 3 / 80 |
 
 **Error analysis:** Most misclassifications occur between visually similar classes (omelet ↔ scrambled) where the texture boundary is ambiguous.
 
@@ -284,15 +296,15 @@ We use GradCAM to visualize which parts of the image are most important for clas
 
 ## 6. Discussion
 
-- **EfficientNet-B0** achieves the best performance despite having the fewest parameters (5.3M vs VGG's 138M). This demonstrates that **Compound Scaling** is highly effective for small custom datasets.
-- **ResNet-50** showed the highest validation accuracy (98.48%) but similar test accuracy to VGG-16 (91.25%), suggesting slight **overfitting** on the validation set.
-- **ConvNeXt-Tiny** converged fastest (early stop at epoch 7) but had the lowest test accuracy (88.75%). This modern architecture may need **more data** to show its advantage.
-- **MobileNetV3** achieved 90% accuracy — viable for **mobile deployment** as a real-time egg scanner app.
+- **ConvNeXt-Tiny** (2022) achieved the best performance (95.00% ± 1.02%) after W&B Sweep tuning. The **Modernized CNN** architecture with techniques borrowed from Vision Transformers proves most effective for this task.
+- **Key insight from Sweep:** ConvNeXt-Tiny's best config uses **Adam optimizer (not AdamW)**, **high dropout (0.5)**, **no label smoothing (0.0)**, and **very low LR (1.5e-05)** — significantly different from default settings.
+- **MobileNetV3** ranked 2nd (92.50% ± 1.02%) with equally low variance.
+- **EfficientNet-B0** scored lowest after sweep tuning (85.00% ± 3.68%) with the highest variance
+- **VGG-16** (90.42%) and **ResNet-50** (89.17%) performed moderately — classic architectures still competitive but not the best.
+- Different architectures prefer different optimizers: ConvNeXt/MobileNet prefer **Adam**, VGG/EfficientNet prefer **AdamW**, showing that **optimizer choice matters and should be tuned per model**.
 - The **2-stage fine-tuning** strategy was crucial — unfreezing the backbone in stage 2 improved accuracy significantly over stage 1 (frozen backbone only).
 - **Weighted CrossEntropyLoss** was applied as precaution even though the dataset was fairly balanced (ratio 1.10x).
-- **Label smoothing (0.1)** helped prevent overconfident predictions and improved generalization.
 - Web-collected images have **high variance** in lighting, background, and angle — this is both a challenge and advantage for model robustness.
-- **Limitation:** Only 1 run (seed=123) was used → no SD or p-value available. Future work should include 3-10 runs for statistical significance.
 
 [🔝](#highlight)
 
@@ -301,16 +313,16 @@ We use GradCAM to visualize which parts of the image are most important for clas
 ## 7. Conclusion
 
 - We selected 5 pre-trained models (VGG-16, ResNet-50, EfficientNet-B0, MobileNetV3, ConvNeXt-Tiny) spanning 2014-2022
-- The best model is **🏆EfficientNet-B0** with test accuracy **92.50%** using only **5.3M parameters**
-- All models achieved **88-92%** accuracy on our web-collected egg dataset (410 images)
-- **2-Stage fine-tuning** with AdamW optimizer and CosineAnnealingLR scheduler works effectively
+- **W&B Sweep (Bayesian, 20 trials)** was used to find optimal hyperparameters per architecture
+- The best model is **🏆ConvNeXt-Tiny** with test accuracy **95.00% ± 1.02%** (3 runs, seeds: 42, 123, 777)
+- All models achieved **85-95%** accuracy on our web-collected egg dataset (410 images)
+- **2-Stage fine-tuning** with per-model optimized hyperparameters works effectively
 - **GradCAM** confirms models focus on egg texture and shape, not background
-- **Eyeball analysis:** 74/80 correct (92.5%), 6 errors mostly between visually similar classes
+- **Eyeball analysis:** 77/80 correct, 3 errors mostly between visually similar classes
 
 ### Future Work
 - Increase dataset to 200+ images per class
 - Add more classes (braised egg, steamed egg, poached egg)
-- Run 3-10 seeds for mean±SD and p-value
 - Try Vision Transformer (ViT, DeiT)
 - Deploy best model as a mobile app using MobileNetV3
 
@@ -320,6 +332,5 @@ We use GradCAM to visualize which parts of the image are most important for clas
 
 ## 🔗 Links
 
-- [W&B Dashboard](https://wandb.ai/mild-supitcha25-nida-business-school/egg-classification)
+- [W&B Dashboard]([https://wandb.ai/mild-supitcha25-nida-business-school/egg-classification](https://wandb.ai/mild-supitcha25-nida-business-school/egg-classification/sweeps/raehcqgv?nw=nwuserployst))
 - [Notebook (Colab)](https://colab.research.google.com/drive/1MjRDBaka-BjGl5M0fNZbH3jrSOW99fN7#scrollTo=eTlAqRUOA4xM)
-
