@@ -89,7 +89,6 @@ Soft, small chunky curds scattered on plate. No defined shape. Creamy yellow col
 - Searched using both Thai and English keywords
 <img width="1554" height="788" alt="image" src="https://github.com/user-attachments/assets/857c606c-634a-4e25-ab91-05c5d07358dd" />
 
-#### 🧹 Data Cleaning:
 - All images are RGB format with varying sizes (168px to 2463px)
 
 #### 📊 EDA:
